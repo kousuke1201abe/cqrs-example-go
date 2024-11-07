@@ -1,0 +1,51 @@
+services:
+  main:
+    build:
+      context: .
+      dockerfile: build/package/app/Dockerfile
+    tty: true
+    ports:
+      - 3000:3000
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/workspace/cqrs-example-go
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: cqrs_example
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+  db_migration:
+    build:
+      context: .
+      dockerfile: build/package/db_migration/Dockerfile
+    environment:
+      - DB_NAME=cqrs_example
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_PASS=password
+      - DB_USER=root
+    depends_on:
+      db:
+        condition: service_healthy
+  seed:
+    build:
+      context: .
+      dockerfile: build/package/seed/Dockerfile
+    environment:
+      - DB_NAME=cqrs_example
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_PASS=password
+      - DB_USER=root
+    depends_on:
+      db_migration:
+        condition: service_completed_successfully

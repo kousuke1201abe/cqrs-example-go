@@ -1,0 +1,15 @@
+{
+    "name": "Development Environment",
+    "dockerComposeFile": [
+        "../compose.yml"
+    ],
+    "service": "main",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.go"
+            ]
+        }
+    },
+    "workspaceFolder": "/workspace/cqrs-example-go",
+}

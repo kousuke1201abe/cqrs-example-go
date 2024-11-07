@@ -1,0 +1,24 @@
+- id: 00000000-0000-0000-0000-000000000001
+  name: 1000円割引プロモーション
+  discount_amount: 1000
+  slot_remaining_amount: 2
+  submitted_at: 2024-10-01 12:00:00
+  modified_at: 2024-10-01 12:00:00
+- id: 00000000-0000-0000-0000-000000000002
+  name: 2000円割引プロモーション
+  discount_amount: 2000
+  slot_remaining_amount: 5
+  submitted_at: 2024-10-01 12:00:00
+  modified_at: 2024-10-01 12:00:00
+- id: 00000000-0000-0000-0000-000000000003
+  name: 3000円割引プロモーション
+  discount_amount: 3000
+  slot_remaining_amount: 10
+  submitted_at: 2019-10-01 12:00:00
+  modified_at: 2019-10-01 12:00:00
+- id: 00000000-0000-0000-0000-000000000004
+  name: 4000円割引プロモーション
+  discount_amount: 4000
+  slot_remaining_amount: 10
+  submitted_at: 2019-10-01 12:00:00
+  modified_at: 2019-10-01 12:00:00

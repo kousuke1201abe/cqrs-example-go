@@ -1,0 +1,80 @@
+input ApplyPromotionInput {
+    customerId: String!
+    promotionId: String!
+}
+
+type ApplyPromotionPayload {
+    promotionId: String!
+}
+
+type Coupon {
+    discountAmount: Int!
+    expiresAt: ISO8601DateTime!
+    id: String!
+    invalidated: Boolean!
+    redeemed: Boolean!
+}
+
+input SubmitPromotionInput {
+    discountAmount: Int!
+    slotRemainingAmount: Int!
+    name: String!
+}
+
+type SubmitPromotionPayload {
+    promotionId: String!
+}
+
+input PublishPromotionInput {
+    promotionId: String!
+}
+
+type PublishPromotionPayload {
+    promotionId: String!
+}
+
+type Customer {
+    id: String!
+}
+
+input GrantCouponInput {
+    customerId: String!
+    discountAmount: Int!
+}
+
+type GrantCouponPayload {
+    couponId: String!
+}
+
+scalar ISO8601DateTime @specifiedBy(url: "https://tools.ietf.org/html/rfc3339")
+
+input InvalidateCouponInput {
+    couponId: String!
+}
+
+type InvalidateCouponPayload {
+    couponId: String!
+}
+
+type Mutation {
+    submitPromotion(input: SubmitPromotionInput!): SubmitPromotionPayload
+    publishPromotion(input: PublishPromotionInput!): PublishPromotionPayload
+    applyPromotion(input: ApplyPromotionInput!): ApplyPromotionPayload
+    grantCoupon(input: GrantCouponInput!): GrantCouponPayload
+    invalidateCoupon(input: InvalidateCouponInput!): InvalidateCouponPayload
+}
+
+type Promotion {
+    appliedCustomerNumber: Int!
+    discountAmount: Int!
+    slotRemainingAmount: Int!
+    published: Boolean!
+    id: String!
+    name: String!
+}
+
+type Query {
+    coupons(customerId: String!): [Coupon!]!
+    customers: [Customer!]!
+    promotions: [Promotion!]!
+}
